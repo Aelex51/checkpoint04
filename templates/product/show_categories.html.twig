@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+    <h1>Description du produit</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Name</th>
+            <td>{{ product.name }}</td>
+        </tr>
+        <tr>
+            <th>Price</th>
+            <td>{{ product.price }}</td>
+        </tr>
+    <tr>
+        <th>Description</th>
+        <td></td>
+    </tr>
+        <tr>
+
+            <img src="{{ vich_uploader_asset(product) }}" class="card-img-top" alt="{{ product.name }}
+        </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

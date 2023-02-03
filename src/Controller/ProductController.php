@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
@@ -16,15 +17,27 @@ class ProductController extends AbstractController
     public function index(ProductRepository $productRepository): Response
     {
         $products = $productRepository->findAll();
+
         return $this->render('product/index.html.twig', [
             'products' => $products,
         ]);
     }
 
     #[Route('/{id}', name: 'product_show', methods: ['GET'])]
-    public function show(Product $product): Response
+    public function show($id, ProductRepository $productRepository): Response
     {
+        $product = $productRepository->find($id);
+
         return $this->render('product/show.html.twig', [
+            'product' => $product,
+        ]);
+    }
+    #[Route('/category/{id}', name: 'product_category')]
+    public function showByCategory(Category $category, ProductRepository $productRepository): Response
+    {
+        $product = $productRepository->findOneBy(['category' => $category]);
+
+        return $this->render('product/show_categories.html.twig', [
             'product' => $product,
         ]);
     }
