@@ -5,9 +5,14 @@ namespace App\DataFixtures;
 use App\Entity\Product;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 
 class ProductFixtures extends Fixture
 {
+    public function __construct(
+        private ContainerBagInterface $containerBag
+    ) {
+    }
     public const KEYBOARDS = [
         [
             'name' => 'Asus ROG Strix Scope TKL',
@@ -146,7 +151,11 @@ class ProductFixtures extends Fixture
         foreach (self::KEYBOARDS as $key => $keyboard) {
             $product = new Product();
             $product->setName($keyboard['name']);
-            $product->setPicture($keyboard['poster']);
+            $product->setPoster($keyboard['poster']);
+//            if (!is_dir($this->containerBag->get('upload_directory'))) {
+//                mkdir(directory: $this->containerBag->get('upload_directory'), recursive: true);
+//            }
+//            copy($image, $this->containerBag->get('upload_directory') . $keyboard['poster']);
             $product->setPrice(floatval($keyboard['price']));
             $product->setCategory($this->getReference($keyboard["category"]));
             $manager->persist($product);
@@ -156,7 +165,7 @@ class ProductFixtures extends Fixture
         foreach (self::GPUS as $gpu) {
             $product = new Product();
             $product->setName($gpu['name']);
-            $product->setPicture($gpu['poster']);
+            $product->setPoster($gpu['poster']);
             $product->setPrice(floatval($gpu['price']));
             $product->setCategory($this->getReference($gpu["category"]));
             $manager->persist($product);
@@ -165,7 +174,7 @@ class ProductFixtures extends Fixture
         foreach (self::SCREENS as $screen) {
             $product = new Product();
             $product->setName($screen['name']);
-            $product->setPicture($screen['poster']);
+            $product->setPoster($screen['poster']);
             $product->setPrice(floatval($screen['price']));
             $product->setCategory($this->getReference($screen["category"]));
             $manager->persist($product);
@@ -174,7 +183,7 @@ class ProductFixtures extends Fixture
         foreach (self::LAPTOPS as $laptop) {
             $product = new Product();
             $product->setName($laptop['name']);
-            $product->setPicture($laptop['poster']);
+            $product->setPoster($laptop['poster']);
             $product->setPrice(floatval($laptop['price']));
             $product->setCategory($this->getReference($laptop["category"]));
             $manager->persist($product);

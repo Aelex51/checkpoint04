@@ -20,6 +20,7 @@ class UserFixtures extends Fixture
         $admin = new User;
         $admin->setEmail('admin@checkpoint.com');
         $admin->setPassword('adminpassword');
+        $admin->setRoles(['ROLE_ADMIN']);
         $manager->persist($admin);
 
         $manager->flush();

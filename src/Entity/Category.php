@@ -3,11 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[Vich\Uploadable]
 class Category
 {
     #[ORM\Id]
@@ -20,6 +24,13 @@ class Category
 
     #[ORM\OneToMany(mappedBy: 'Category', targetEntity: Product::class)]
     private Collection $products;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private string $poster;
+
+    #[Vich\UploadableField(mapping: 'poster_file', fileNameProperty: 'poster')]
+    private ?File $posterFile = null;
+
 
     public function __construct()
     {
@@ -43,9 +54,6 @@ class Category
         return $this;
     }
 
-    /**
-     * @return Collection<int, Product>
-     */
     public function getProducts(): Collection
     {
         return $this->products;
@@ -71,5 +79,29 @@ class Category
         }
 
         return $this;
+    }
+
+    public function getPosterFile(): ?File
+    {
+        return $this->posterFile;
+    }
+
+    public function setPosterFile(?File $image): Category
+    {
+        $this->posterFile = $image;
+        if ($image) {
+            $this->updatedAt = new DateTime('now');
+        }
+        return $this;
+    }
+
+    public function getPoster(): string
+    {
+        return $this->poster;
+    }
+
+    public function setPoster(string $poster): void
+    {
+        $this->poster = $poster;
     }
 }

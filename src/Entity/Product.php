@@ -65,18 +65,6 @@ class Product
         return $this;
     }
 
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(?string $picture): self
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
-
     public function getPrice(): ?float
     {
         return $this->price;
