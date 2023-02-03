@@ -3,18 +3,8 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-{#{% for category in categories %}#}
-{#<div class="col-sm-10 col-md-6 col-lg-4 mt-4 mb-4 ">#}
-{#    <div class="card" style="width: 18rem;">#}
-{#        <img src="{{ vich_uploader_asset(category) }}" class="card-img-top" alt="{{ category.name }}">#}
-{#        <div class="card-body">#}
-{#            <p class="card-text">content</p>#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}
-
     <div class="container">
-        <h1>Toutes les décisions</h1>
+        <h1>Catégories</h1>
 
         <div class="row custom-line">
             {% for category in categories %}

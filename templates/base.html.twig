@@ -18,6 +18,8 @@
         {% include "include/_navbar.html.twig" %}
     </header>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+            <img src="{{ asset('public/uploads/images/banniere.jpg') }}" alt="">
+        {% endblock %}
     </body>
 </html>

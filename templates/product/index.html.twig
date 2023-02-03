@@ -26,9 +26,19 @@
                             <div class="card-body text-primary">
                                 <img src="{{ vich_uploader_asset(product) }}" class="card-img-top" alt="{{ product.name }}">
                         </div>
+                            <div>
+                                <a href="{{ path('app_cart_add', {'id': product.id}) }}" class="btn btn-success float-right">
+{#                                    <i class="fas fa-shopping-cart mr-1"></i>#}
+                                    Ajouter à mon panier
+                                </a>
+                                <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-success float-right">
+{#                                    <i class="fas fa-shopping-cart mr-1"></i>#}
+                                    Description
+                                </a>
+                            </div>
                         <div class=" card-footer bg-transparent border-dark">
-                                <br><a href="{{ path('app_product', {id: category.id }) }}"
-                                       class="stretched-link"></a>
+{#                                <br><a href="{{ path('app_product', {id: product.id }) }}"#}
+{#                                       class="stretched-link"></a>#}
                             </div>
                         </div>
                     </div>
